@@ -1,0 +1,32 @@
+<div class="mt-4 pb-5">
+    <div class="container d-flex flex-column">
+        <div class="title d-flex justify-content-center">
+            <p class="fs-3 fw-light">Productos destacados</p>
+        </div>
+        <div class="subtitle d-flex justify-content-center">
+            <p class="fs-1 text-light fw-bold">Nuestros artículos más vendidos</p>
+        </div>
+        <div class="description d-flex justify-content-center">
+            <p class="fs-2 fw-light text-center">Descubre nuestros productos más populares que nuestros clientes adoran.
+                Desde decoración del hogar hasta moda, tenemos algo para todos.</p>
+        </div>
+    </div>
+    <div class="row">
+        <!-- @for(service of data.main_services; track service.title){ -->
+        <div class="col d-flex justify-content-center">
+            <div class="card glas-card m-3" style="width: 18rem;">
+                <img src="https://img.freepik.com/vector-gratis/maleta-viaje-realista_1284-4831.jpg?t=st=1724601280~exp=1724604880~hmac=9b760c27cb8f46b5c8ba6a01442713270afa9f919b65bfc75b1266647e1285fa&w=740" class="card-img-top" alt="product">
+                <div class="card-body mb-4">
+                    <h5 class="card-title text-center fs-4 text-light">Acme Lamp</h5>
+                    <p class="fs-5 fw-light">Stylish and energy-efficient lighting for your home.</p>
+                </div>
+                <div class="card-footer d-flex flex-column">
+                    <p class="fs-4 text-center">Precio: $256000</p>
+                    <button type="button" class="btn btn-primary btn-lg me-3">Agregar al carrito<i
+                            class="fa-solid fa-cart-shopping ms-2"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- } -->
+    </div>
+</div>

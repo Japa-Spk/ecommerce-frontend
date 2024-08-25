@@ -1,0 +1,42 @@
+<div class="mt-4 pb-5">
+    <div class="d-flex flex-column">
+        <div class="title d-flex justify-content-center">
+            <p class="fs-3 fw-light">Comprar por categoría</p>
+        </div>
+        <div class="subtitle d-flex justify-content-center">
+            <p class="fs-1 text-light fw-bold">Explora nuestras categorías de productos</p>
+        </div>
+        <div class="description d-flex justify-content-center">
+            <p class="fs-2 fw-light text-center">Explore nuestra amplia selección de productos en varias categorías para
+                encontrar el ajuste perfecto para sus necesidades.</p>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <!-- @for(service of data.main_services; track service.title){ -->
+        <div class="col">
+            <div class="category d-flex flex-column align-items-center">
+                <i class="fa-solid fa-bag-shopping mb-3" style="font-size: 3rem;"></i>
+                <p class="fs-6 text-light fw-bold text-center">Maletines</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="category d-flex flex-column align-items-center">
+                <i class="fa-solid fa-compass mb-3" style="font-size: 3rem;"></i>
+                <p class="fs-6 text-light fw-bold text-center">Accesorios</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="category d-flex flex-column align-items-center">
+                <i class="fa-solid fa-mobile-screen-button mb-3" style="font-size: 3rem;"></i>
+                <p class="fs-6 text-light fw-bold text-center">Tecnologia</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="category d-flex flex-column align-items-center">
+                <i class="fa-solid fa-house mb-3" style="font-size: 3rem;"></i>
+                <p class="fs-6 text-light fw-bold text-center">Hogar</p>
+            </div>
+        </div>
+        <!-- } -->
+    </div>
+</div>

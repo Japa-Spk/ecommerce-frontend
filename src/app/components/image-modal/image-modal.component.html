@@ -1,0 +1,33 @@
+<div class="modal fade" [id]="id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content glas-modal">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">{{ title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div [id]="'modal'+id" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+          <div class="carousel-inner">
+            @for(img of images; track img){
+            <div class="carousel-item" [ngClass]="{'active':images[0] === img}">
+              <picture class="img-container d-flex justify-content-center">
+                <source [srcset]="img" type="image/webp">
+                <img class="card-img-top img-fluid" [src]="img" alt="modal">
+              </picture>
+            </div>
+            }
+          </div>
+          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#modal'+id" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#modal'+id" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center" *ngIf="rawHtml.length>0">
+        <div [innerHTML]="sanitizedHtml"></div>
+      </div>
+    </div>
+  </div>
+</div>
