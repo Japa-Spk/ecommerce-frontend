@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-presentation',
@@ -7,7 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
   standalone: true
 })
 export class PresentationComponent implements OnInit {
-  @Input() data:any;
   constructor() { }
 
   ngOnInit() {

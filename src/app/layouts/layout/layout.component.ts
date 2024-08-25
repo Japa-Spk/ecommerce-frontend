@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//Profile
-import { Profile } from '../../shared/data/profile'
 //Components
 import { HeaderComponent } from './header/header.component'
 import { FooterComponent } from './footer/footer.component'
@@ -16,7 +14,6 @@ import { ImageModalComponent } from '../../components/image-modal/image-modal.co
   imports: [HeaderComponent, FooterComponent, PresentationComponent, FeaturedProductsComponent, CategoriesComponent, ImageModalComponent]
 })
 export class LayoutComponent implements OnInit {
-  public profile = new Profile();
   constructor(
   ) {
 
