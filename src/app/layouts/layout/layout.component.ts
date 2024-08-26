@@ -15,6 +15,7 @@ import { ImageModalComponent } from '../../components/image-modal/image-modal.co
 })
 export class LayoutComponent implements OnInit {
   constructor(
+
   ) {
 
   }

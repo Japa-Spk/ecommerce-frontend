@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 //Services
 import { AuthService } from '../../shared/services/auth/auth.service'
+import { AlertService } from '../../shared/services/base/alerts.service'
+import { LocalStorageService } from '../../shared/services/storage/localstorage.service'
 //Interfaces
 interface Usuario {
   email: string,
@@ -12,14 +14,15 @@ interface Usuario {
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  imports: [ReactiveFormsModule],
   standalone: true
 })
 
 export class LoginComponent implements OnInit {
   //Formulario
-  public loginForm: FormGroup | undefined;
+  public loginForm!: FormGroup;
   public initform = false;
-  constructor(private formBuilder: FormBuilder, private _authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private _authService: AuthService, private _alertService: AlertService, private _lsService: LocalStorageService) {
     //Inicializar Formulario
     this.buildForm();
   }
@@ -31,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   buildForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
     this.initform = true;
@@ -40,7 +43,17 @@ export class LoginComponent implements OnInit {
   login() {
     this._authService.getLogin(this.loginForm?.value).then(res => {
       console.log('login result ->', res);
-
+      //Crear localStorage Usuario
+      var Usuario = {
+        email: this.loginForm.value.email,
+        token: res.token,
+        expiresin: res.expiresIn,
+        dateLogin: new Date()
+      }
+      this._lsService.set('user', Usuario);
+    }, (error) => {
+      console.log('login result error->', error);
+      this._alertService.alertaError('No se inicio sesion', error.error.description);
     })
   }
 

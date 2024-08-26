@@ -1,4 +1,5 @@
-<div class="container mt-5">
+@if(initform){
+<div class="container mt-5" >
     <div class="row">
         <div class="col-md-12">
             <div class="brand d-flex justify-content-center mb-5">
@@ -6,17 +7,37 @@
                 <p class="fs-1">Ecommerce</p>
             </div>
             <h2 class="text-center">Iniciar Sesion</h2>
-            <form>
+            <form [formGroup]="loginForm" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="loginEmail" placeholder="correo@ejemplo.com" required>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="correo@ejemplo.com" formControlName="email">
+                    @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid){
+                        @if(loginForm.get('email')?.errors?.['required']){
+                            <div class="text-danger">
+                                El correo electronico es obligatorio
+                            </div>
+                        }
+                        @if(loginForm.get('email')?.errors?.['email']){
+                            <div class="text-danger">
+                                El correo electronico no es valido
+                            </div>
+                        }
+                    }
                 </div>
                 <div class="mb-3">
                     <label for="loginPassword" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" formControlName="password">
+                    @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid){
+                        @if(loginForm.get('email')?.errors?.['required']){
+                            <div class="text-danger">
+                                La Contraseña es obligatoria
+                            </div>
+                        }
+                    }
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                <button type="submit" class="btn btn-primary w-100" [disabled]="!loginForm.valid" (click)="login()">Iniciar Sesión</button>
             </form>
         </div>
     </div>
 </div>
+}
