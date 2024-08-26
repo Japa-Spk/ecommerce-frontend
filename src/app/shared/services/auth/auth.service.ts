@@ -24,6 +24,17 @@ export class AuthService {
         }
     }
 
+    async register(user:any): Promise<any> {
+        var url_point = 'api/auth/signup';
+        try {
+            const consulta$ = this.http.post(this.url_api + url_point, user);
+            const resultado = await firstValueFrom(consulta$);
+            return resultado;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
 
 

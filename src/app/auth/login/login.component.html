@@ -1,4 +1,4 @@
-@if(initform){
+@if(initform && _ecommerceService.user == null){
 <div class="container mt-5" >
     <div class="row">
         <div class="col-md-12">
@@ -7,7 +7,7 @@
                 <p class="fs-1">Ecommerce</p>
             </div>
             <h2 class="text-center">Iniciar Sesion</h2>
-            <form [formGroup]="loginForm" class="needs-validation" novalidate>
+            <form [formGroup]="loginForm">
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label">Correo electrónico</label>
                     <input type="email" class="form-control" id="loginEmail" placeholder="correo@ejemplo.com" formControlName="email">
@@ -28,7 +28,7 @@
                     <label for="loginPassword" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" formControlName="password">
                     @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid){
-                        @if(loginForm.get('email')?.errors?.['required']){
+                        @if(loginForm.get('password')?.errors?.['required']){
                             <div class="text-danger">
                                 La Contraseña es obligatoria
                             </div>
@@ -37,7 +37,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100" [disabled]="!loginForm.valid" (click)="login()">Iniciar Sesión</button>
             </form>
+            <a [routerLink]="'/register'">Si no tiene cuenta, Registrese aca</a>
         </div>
     </div>
 </div>
+}@else{
+    <p class="fs-1 text-center">Usuario ya logeado</p>
 }

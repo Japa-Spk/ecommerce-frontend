@@ -5,25 +5,96 @@
                 <i class="fa-solid fa-shop ms-3 me-3" style="font-size: 3rem;"></i>
                 <p class="fs-1">Ecommerce</p>
             </div>
-            <h2>Registro</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="registerName" class="form-label">Nombre completo</label>
-                    <input type="text" class="form-control" id="registerName" placeholder="Nombre completo" required>
+            <h2 class="text-center">Registro</h2>
+            <form [formGroup]="registerForm" class="row">
+                <div class="col-6 mb-3">
+                    <label for="registerFirstName" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="registerFirstName" placeholder="Nombres" formControlName="firstName">
+                    @if(registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid){
+                        @if(registerForm.get('firstName')?.errors?.['required']){
+                            <div class="text-danger">
+                                Los Nombres son obligatorios
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="mb-3">
+                <div class="col-6 mb-3">
+                    <label for="registerName" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="registerName" placeholder="Apellidos" formControlName="lastName">
+                    @if(registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid){
+                        @if(registerForm.get('lastName')?.errors?.['required']){
+                            <div class="text-danger">
+                                Los Apellidos son obligatorios
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-12 mb-3">
                     <label for="registerEmail" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="registerEmail" placeholder="correo@ejemplo.com" required>
+                    <input type="email" class="form-control" id="registerEmail" placeholder="correo@ejemplo.com" formControlName="email">
+                    @if(registerForm.get('email')?.touched && registerForm.get('email')?.invalid){
+                        @if(registerForm.get('email')?.errors?.['required']){
+                            <div class="text-danger">
+                                El correo electronico es obligatorio
+                            </div>
+                        }
+                        @if(registerForm.get('email')?.errors?.['email']){
+                            <div class="text-danger">
+                                El correo electronico no es valido
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="mb-3">
+                <div class="col-6 mb-3">
+                    <label for="registerAddress" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="registerAddress" placeholder="Direccion" formControlName="address">
+                    @if(registerForm.get('address')?.touched && registerForm.get('address')?.invalid){
+                        @if(registerForm.get('address')?.errors?.['required']){
+                            <div class="text-danger">
+                                La direccion es obligatoria
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="registerPhone" class="form-label">Telefono</label>
+                    <input type="text" class="form-control" id="registerPhone" placeholder="Telefono" formControlName="phone">
+                    @if(registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid){
+                        @if(registerForm.get('phone')?.errors?.['required']){
+                            <div class="text-danger">
+                                El telefono es obligatorio
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-12 mb-3">
                     <label for="registerPassword" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña" required>
+                    <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña" formControlName="password">
+                    @if(registerForm.get('password')?.touched && registerForm.get('password')?.invalid){
+                        @if(registerForm.get('password')?.errors?.['required']){
+                            <div class="text-danger">
+                                La Contraseña es obligatoria
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="mb-3">
+                <div class="col-12 mb-3">
                     <label for="registerConfirmPassword" class="form-label">Confirmar Contraseña</label>
-                    <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirmar Contraseña" required>
+                    <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirmar Contraseña" formControlName="confirmPassword">
+                    @if(registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid){
+                        @if(registerForm.get('confirmPassword')?.errors?.['required']){
+                            <div class="text-danger">
+                                Confirmar la Contraseña es obligatorio
+                            </div>
+                        }
+                        @if(registerForm.errors?.['matchValues']){
+                            <div class="text-danger">
+                                Para confirmar la Contraseña tienen que ser iguales los valores
+                            </div>
+                        }
+                    }
                 </div>
-                <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                <button type="submit" class="btn btn-success w-100" [disabled]="!registerForm.valid" (click)="register()">Registrarse</button>
             </form>
         </div>
     </div>

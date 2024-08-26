@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+//Modules
+import { RouterModule } from '@angular/router';
 //Services
 import { AuthService } from '../../shared/services/auth/auth.service'
 import { AlertService } from '../../shared/services/base/alerts.service'
 import { LocalStorageService } from '../../shared/services/storage/localstorage.service'
-//Interfaces
-interface Usuario {
-  email: string,
-  password: string
-};
+import { EcommerceService } from '../../shared/services/ecommerce.service'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterModule],
   standalone: true
 })
 
@@ -22,7 +20,7 @@ export class LoginComponent implements OnInit {
   //Formulario
   public loginForm!: FormGroup;
   public initform = false;
-  constructor(private formBuilder: FormBuilder, private _authService: AuthService, private _alertService: AlertService, private _lsService: LocalStorageService) {
+  constructor(private formBuilder: FormBuilder, private _authService: AuthService, private _alertService: AlertService, private _lsService: LocalStorageService, public _ecommerceService: EcommerceService) {
     //Inicializar Formulario
     this.buildForm();
   }
@@ -51,6 +49,7 @@ export class LoginComponent implements OnInit {
         dateLogin: new Date()
       }
       this._lsService.set('user', Usuario);
+      this._ecommerceService.loadUser();
     }, (error) => {
       console.log('login result error->', error);
       this._alertService.alertaError('No se inicio sesion', error.error.description);
