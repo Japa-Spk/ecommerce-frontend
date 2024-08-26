@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 //Modules
 import { RouterModule } from '@angular/router';
 //Services
@@ -20,7 +21,13 @@ export class LoginComponent implements OnInit {
   //Formulario
   public loginForm!: FormGroup;
   public initform = false;
-  constructor(private formBuilder: FormBuilder, private _authService: AuthService, private _alertService: AlertService, private _lsService: LocalStorageService, public _ecommerceService: EcommerceService) {
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder, 
+    private _authService: AuthService, 
+    private _alertService: AlertService, 
+    private _lsService: LocalStorageService, 
+    public _ecommerceService: EcommerceService) {
     //Inicializar Formulario
     this.buildForm();
   }
@@ -50,6 +57,7 @@ export class LoginComponent implements OnInit {
       }
       this._lsService.set('user', Usuario);
       this._ecommerceService.loadUser();
+      this.router.navigate(['/']);
     }, (error) => {
       console.log('login result error->', error);
       this._alertService.alertaError('No se inicio sesion', error.error.description);
