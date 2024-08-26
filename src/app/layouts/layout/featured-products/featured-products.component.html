@@ -12,21 +12,23 @@
         </div>
     </div>
     <div class="row">
-        <!-- @for(service of data.main_services; track service.title){ -->
+        @for(product of _ecommerceService.products; track product.sku){
         <div class="col d-flex justify-content-center">
             <div class="card glas-card m-3" style="width: 18rem;">
                 <img src="https://img.freepik.com/vector-gratis/maleta-viaje-realista_1284-4831.jpg?t=st=1724601280~exp=1724604880~hmac=9b760c27cb8f46b5c8ba6a01442713270afa9f919b65bfc75b1266647e1285fa&w=740" class="card-img-top" alt="product">
                 <div class="card-body mb-4">
-                    <h5 class="card-title text-center fs-4 text-light">Acme Lamp</h5>
-                    <p class="fs-5 fw-light">Stylish and energy-efficient lighting for your home.</p>
+                    <h5 class="card-title text-center fs-4 text-light">{{ product.productName }}</h5>
+                    <p class="fs-5 fw-light">{{ product.description }}</p>
                 </div>
                 <div class="card-footer d-flex flex-column">
-                    <p class="fs-4 text-center">Precio: $256000</p>
+                    <p class="fs-4 text-center">Precio: ${{ product.price }}</p>
                     <button type="button" class="btn btn-primary btn-lg me-3">Agregar al carrito<i
                             class="fa-solid fa-cart-shopping ms-2"></i></button>
                 </div>
             </div>
         </div>
-        <!-- } -->
+        }@empty{
+            <p class="fs-3 fw-light">No encontro productos</p>
+        }
     </div>
 </div>
